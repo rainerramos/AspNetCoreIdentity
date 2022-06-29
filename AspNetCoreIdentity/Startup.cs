@@ -34,6 +34,11 @@ namespace AspNetCoreIdentity
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+            });
+
             services.AddControllersWithViews();
         }
 
