@@ -30,15 +30,23 @@ namespace AspNetCoreIdentity.Controllers
         {
             return View();
         }
+
         //Roles = papel
         [Authorize(Roles = "Admin")]
         public IActionResult Secret()
         {
             return View();
         }
+
         //policy = permissão
         [Authorize(Policy = "PodeExcluir")]
         public IActionResult SecretClaim()
+        {
+            return View("Secret");
+        }
+
+        [Authorize(Policy = "PodeEscrever")]
+        public IActionResult SecretClaimGravar()
         {
             return View("Secret");
         }
