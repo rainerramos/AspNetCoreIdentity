@@ -1,4 +1,5 @@
-﻿using AspNetCoreIdentity.Models;
+﻿using AspNetCoreIdentity.Extensions;
+using AspNetCoreIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static AspNetCoreIdentity.Extensions.CustomAuthorization;
 
 namespace AspNetCoreIdentity.Controllers
 {
@@ -51,6 +53,11 @@ namespace AspNetCoreIdentity.Controllers
             return View("Secret");
         }
 
+        [ClaimsAuthorize("Produtos","Ler")]
+        public IActionResult ClaimsCustom()
+        {
+            return View("Secret");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
