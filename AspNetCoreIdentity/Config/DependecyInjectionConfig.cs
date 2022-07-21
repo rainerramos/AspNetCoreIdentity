@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreIdentity.Config
 {
@@ -27,7 +28,9 @@ namespace AspNetCoreIdentity.Config
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
-            services.AddScoped<AuditoriaFilter>();
+            var serviceProvider = services.BuildServiceProvider();
+            var logger = serviceProvider.GetService<ILogger<AuditoriaFilter>>();
+            services.AddSingleton(typeof(ILogger), logger);
 
             return services;
         }
