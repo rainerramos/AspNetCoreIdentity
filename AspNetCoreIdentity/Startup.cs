@@ -1,4 +1,5 @@
 using AspNetCoreIdentity.Config;
+using AspNetCoreIdentity.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,9 +25,7 @@ namespace AspNetCoreIdentity
             }
 
             Configuration = builder.Build();  
-        }
-
-        
+        }       
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -34,7 +33,10 @@ namespace AspNetCoreIdentity
             services.AddAuthorizationConfig();
             services.ResolveDependencies();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => 
+            {
+                options.Filters.Add(typeof(AuditoriaFilter));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

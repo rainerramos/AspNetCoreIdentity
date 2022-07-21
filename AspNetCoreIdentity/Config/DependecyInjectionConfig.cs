@@ -27,6 +27,8 @@ namespace AspNetCoreIdentity.Config
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
 
+            services.AddScoped<AuditoriaFilter>();
+
             return services;
         }
     }
